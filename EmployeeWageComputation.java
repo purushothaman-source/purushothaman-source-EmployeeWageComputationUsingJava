@@ -5,8 +5,6 @@ import java.util.Random;
 class EmpWage {
 	EmpWage() {
 		Random random = new Random();
-		int randomnum = random.nextInt(3);
-		System.out.println("RandomNumber :" + randomnum);
 		int EMP_RATE_PER_HR = 20;
 		int MAX_HRS_IN_MONTH = 100;
 		int NUM_WORKING_DAYS = 20;
