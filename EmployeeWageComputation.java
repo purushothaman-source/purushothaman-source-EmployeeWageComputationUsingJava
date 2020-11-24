@@ -2,45 +2,41 @@ package com.javaPrograms.employeeWageComputation;
 
 import java.util.Random;
 
-class EmpWage {
-	EmpWage() {
-		Random random = new Random();
-		int randomnum = random.nextInt(3);
-		System.out.println("RandomNumber :" + randomnum);
-		int EMP_RATE_PER_HR = 20;
-		int MAX_HRS_IN_MONTH = 100;
-		int NUM_WORKING_DAYS = 20;
-		int totalEmpHrs = 0;
-		int totalWorkingDays = 0;
-		int empHrs;
-		int totalSalary;
-		while (totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays < NUM_WORKING_DAYS) {
-			totalWorkingDays++;
-			System.out.println("Total working day:" + totalWorkingDays);
-			randomnum = random.nextInt(3);
-			switch (randomnum) {
-			case 1:
-				empHrs = 4;
-				break;
-			case 2:
-				empHrs = 8;
-				break;
+class EmpWageForMultipleCompany{
+	 public static final int IS_PART_TIME=1;
+	 public static final int IS_FULLTIME=1;
+	 
+	 public static int computeEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
+	 {
+		 int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
+		 Random random =new Random();
+		 while(totalEmpHrs <=maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+		 {
+			 totalWorkingDays++;
+			 int empCheck =random.nextInt(3);
+			 switch (empCheck) {
+			 case 1 :
+				 empHrs=4;
+				 break;
+			 case 2:
+				 empHrs=8;
+				 break;
 			default:
-				empHrs = 0;
-			}
-			totalEmpHrs = (totalEmpHrs + empHrs);
-			System.out.println("Total Employee Hours: " + totalEmpHrs);
-		}
-		totalSalary = (totalEmpHrs * EMP_RATE_PER_HR);
-		System.out.println(">>>>>>Total Salary>>>>: " + totalSalary);
-
+				 empHrs=0;
+			 }
+			 totalEmpHrs+=empHrs;
+			 System.out.println("Day :"+totalWorkingDays +" Emp Hr:" +empHrs);
+		 }
+		 int totalEmpWage =totalEmpHrs *empRatePerHour;
+		 System.out.println("Total Emp Wage for Company: "+company+" is:" +totalEmpWage);
+		 return totalEmpWage;
+	 }
+}
+public class EmployeeWageComputation{
+	public static void main(String[]args) {
+		EmpWageForMultipleCompany.computeEmpWage("TCS",20,2,10);
+		EmpWageForMultipleCompany.computeEmpWage("Accenture",10,4,20);
+		
 	}
 }
 
-public class EmployeeWageComputation {
-
-	public static void main(String[] args) {
-		EmpWage empwage = new EmpWage();
-
-	}
-}
