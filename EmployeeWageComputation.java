@@ -15,7 +15,7 @@ class EmpWage {
 		while (totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays < NUM_WORKING_DAYS) {
 			totalWorkingDays++;
 			System.out.println("Total working day:" + totalWorkingDays);
-			randomnum = random.nextInt(3);
+			int randomnum = random.nextInt(3);
 			switch (randomnum) {
 			case 1:
 				empHrs = 4;
