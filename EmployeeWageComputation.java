@@ -4,9 +4,22 @@ import java.util.Random;
 
 class EmpWageForMultipleCompany{
 	 public static final int IS_PART_TIME=1;
-	 public static final int IS_FULLTIME=1;
+	 public static final int IS_FULLTIME=2;
+	 private final String company;
+	 private final int empRatePerHour;
+	 private final int numOfWorkingDays;
+	 private final int maxHoursPerMonth;
+	 private int totalEmpWage;
 	 
-	 public static int computeEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
+	 public EmpWageForMultipleCompany(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+		super();
+		this.company = company;
+		this.empRatePerHour = empRatePerHour;
+		this.numOfWorkingDays = numOfWorkingDays;
+		this.maxHoursPerMonth = maxHoursPerMonth;
+	}
+
+	public  void computeEmpWage()
 	 {
 		 int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
 		 Random random =new Random();
@@ -15,10 +28,10 @@ class EmpWageForMultipleCompany{
 			 totalWorkingDays++;
 			 int empCheck =random.nextInt(3);
 			 switch (empCheck) {
-			 case 1 :
+			 case IS_PART_TIME :
 				 empHrs=4;
 				 break;
-			 case 2:
+			 case IS_FULLTIME:
 				 empHrs=8;
 				 break;
 			default:
@@ -27,16 +40,24 @@ class EmpWageForMultipleCompany{
 			 totalEmpHrs+=empHrs;
 			 System.out.println("Day :"+totalWorkingDays +" Emp Hr:" +empHrs);
 		 }
-		 int totalEmpWage =totalEmpHrs *empRatePerHour;
-		 System.out.println("Total Emp Wage for Company: "+company+" is:" +totalEmpWage);
-		 return totalEmpWage;
+		 totalEmpWage =totalEmpHrs *empRatePerHour;
 	 }
+
+	@Override
+	public String toString() {
+		return " [company=" + company + ", totalEmpWage=" + totalEmpWage + "]";
+	}
 }
 public class EmployeeWageComputation{
 	public static void main(String[]args) {
-		EmpWageForMultipleCompany.computeEmpWage("TCS",20,2,10);
-		EmpWageForMultipleCompany.computeEmpWage("Accenture",10,4,20);
+		EmpWageForMultipleCompany tcs=new EmpWageForMultipleCompany("TCS", 20, 2, 10);
+		tcs.computeEmpWage();
+		System.out.println(tcs);
+		EmpWageForMultipleCompany accenture=new EmpWageForMultipleCompany("Accenture", 10, 4, 20);
+		accenture.computeEmpWage();
+		System.out.println(accenture);
+		
+		
 		
 	}
 }
-
