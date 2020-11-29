@@ -2,7 +2,7 @@ package com.javaPrograms.employeeWageComputation;
 
 import java.util.Random;
 
-public class EmployeeWageComputation {
+public class EmployeeWageComputation implements IcomputeEmpWage {
 	public static final int IS_PART_TIME=1;
 	public static final int IS_FULL_TIME=2;
 	
@@ -15,13 +15,13 @@ public class EmployeeWageComputation {
 		companyEmpWage=new CompanyEmpWage[5];
 	}
 	
-	private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
+	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
 	{
 		companyEmpWage[numOfCompany]=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
 		numOfCompany++;
 	}
 	
-	private void computeEmpWage()
+	public void computeEmpWage()
 	{
 		for (int i = 0; i <numOfCompany; i++) 
 		{
@@ -31,7 +31,7 @@ public class EmployeeWageComputation {
 	}
 	
 	
-	private int computeEmpWage(CompanyEmpWage companyEmpWage)
+	public int computeEmpWage(CompanyEmpWage companyEmpWage)
 	{
 	int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
 	Random random=new Random();
@@ -63,7 +63,7 @@ public class EmployeeWageComputation {
 
 	
 	public static void main(String[] args) {
-		EmployeeWageComputation empWageBuilder=new EmployeeWageComputation();
+	    IcomputeEmpWage empWageBuilder=new EmployeeWageComputation();
 		empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
 		empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
 		empWageBuilder.computeEmpWage();
