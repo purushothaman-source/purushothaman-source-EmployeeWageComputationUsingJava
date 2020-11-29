@@ -5,4 +5,5 @@ interface IcomputeEmpWage {
 	public void computeEmpWage();
 	public int computeEmpWage(CompanyEmpWage companyEmpWage);
 	
+	
 }

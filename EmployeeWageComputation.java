@@ -1,5 +1,6 @@
 package com.javaPrograms.employeeWageComputation;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class EmployeeWageComputation implements IcomputeEmpWage {
@@ -8,25 +9,28 @@ public class EmployeeWageComputation implements IcomputeEmpWage {
 	
 	public int numOfCompany=0;
 	
-	CompanyEmpWage companyEmpWage[];
+	private LinkedList<CompanyEmpWage> companyEmpWageList;
 	
 	public EmployeeWageComputation()
 	{
-		companyEmpWage=new CompanyEmpWage[5];
+		companyEmpWageList= new LinkedList<CompanyEmpWage>();
 	}
 	
 	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
 	{
-		companyEmpWage[numOfCompany]=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-		numOfCompany++;
+CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);	
+		
+		companyEmpWageList.add(companyEmpWage);
+		
 	}
 	
 	public void computeEmpWage()
 	{
-		for (int i = 0; i <numOfCompany; i++) 
+		for (int i = 0; i <companyEmpWageList.size(); i++) 
 		{
-			companyEmpWage[i].setTotalEmpWage(this.computeEmpWage(companyEmpWage[i]));
-			System.out.println(companyEmpWage[i]);
+			CompanyEmpWage company=companyEmpWageList.get(i);
+			company.setTotalEmpWage(this.computeEmpWage(company));
+			System.out.println(company);
 		}
 	}
 	
@@ -68,5 +72,6 @@ public class EmployeeWageComputation implements IcomputeEmpWage {
 		empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
 		empWageBuilder.computeEmpWage();
 	}
+	
 }
 
