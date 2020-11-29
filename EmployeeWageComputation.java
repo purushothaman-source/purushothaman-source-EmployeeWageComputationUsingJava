@@ -1,6 +1,8 @@
 package com.javaPrograms.employeeWageComputation;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 public class EmployeeWageComputation implements IcomputeEmpWage {
@@ -10,17 +12,20 @@ public class EmployeeWageComputation implements IcomputeEmpWage {
 	public int numOfCompany=0;
 	
 	private LinkedList<CompanyEmpWage> companyEmpWageList;
+	private Map<String, CompanyEmpWage>companyEmpWageMap;
 	
 	public EmployeeWageComputation()
 	{
 		companyEmpWageList= new LinkedList<CompanyEmpWage>();
+		companyEmpWageMap=new HashMap<String, CompanyEmpWage>();
 	}
 	
 	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
 	{
-CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);	
+        CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);	
 		
 		companyEmpWageList.add(companyEmpWage);
+		companyEmpWageMap.put(company, companyEmpWage);
 		
 	}
 	
@@ -71,7 +76,11 @@ CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerHour, numOfW
 		empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
 		empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
 		empWageBuilder.computeEmpWage();
+		System.out.println(empWageBuilder.getTotalWage("Dmart"));
 	}
+	@Override
+	public int getTotalWage(String company) {
+		return companyEmpWageMap.get(company).totalEmpWage;
 	
 }
-
+}
